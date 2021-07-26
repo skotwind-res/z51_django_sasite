@@ -3,5 +3,9 @@
 {% block title %}This main page{% endblock %}
 
 {% block content %}
-    <h1>MAIN</h1>
+    {% for record in data %}
+        <h2>{{ record.title }}</h2>
+        <h3>{{ record.content }}</h3>
+        <h3>{{ record.price }}$</h3>
+    {% endfor %}
 {% endblock %}
