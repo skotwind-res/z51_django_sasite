@@ -1,10 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
-def some_shit(request):
-    return HttpResponse("<h2>My first page</h2>")
+def about(request):
+    return render(request, 'main/about.html')
+
 
 def main(request):
-    my_list = ['ti', 'pi', 'door']
-    return render(request, 'main/main_page.html', {'context': my_list})
+    return render(request, 'main/main_page.html')
+
+
+def contacts(request):
+    return render(request, 'main/contacts.html')
