@@ -3,9 +3,22 @@
 {% block title %}This main page{% endblock %}
 
 {% block content %}
+    {% if name %}
+        <h1>HEllo {{ name }}</h1>
+    {% endif %}
+    <h1>{{ data.trash }}</h1>
     {% for record in data %}
         <h2>{{ record.title }}</h2>
         <h3>{{ record.content }}</h3>
         <h3>{{ record.price }}$</h3>
+        <h3>{{ record.rubric }}</h3>
     {% endfor %}
+    {% for r in rub %}
+        <a href="/home/{{ r.pk }}/">{{ r.name }}</a>
+    {% endfor %}
+    <form action="/home/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}
