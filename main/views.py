@@ -1,7 +1,15 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+from .serializers import CommentSerializer
 
 from .models import CommonInfo, Rubric
 from .forms import NameForm
+
+def my_apipi(request):
+    if request.method == "GET":
+        comments = CommonInfo.objects.all()
+        serializer = CommentSerializer(comments, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 def about(request):
@@ -13,6 +21,8 @@ def main(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
         if form.is_valid():
+            new_rubric = Rubric(name=form.cleaned_data['your_name'])
+            new_rubric.save()
             return render(request, 'main/main_page.html', {'data': data, 'form': form, 'name': form.cleaned_data['your_name']})
 
     form = NameForm()
